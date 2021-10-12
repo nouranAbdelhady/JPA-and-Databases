@@ -2,13 +2,7 @@ package Demo;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-
+import javax.persistence.*;
 import Entities.Employee;
 
 public class App {
@@ -16,17 +10,21 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		addEmployee(1, "Nouran", "Abdelhady");
-		addEmployee(2, "Salma", "Azzam");
-		addEmployee(3, "Mohamed", "Kadry");
-		getEmployees();
+				
+		addEmployee(new Employee("Nouran", "Abdelhady",20,"natID1","012","nouranabdelhady@gmail.com","Software Engineer"));
+		addEmployee(new Employee("Salma", "Azzam",25,"natID2","015","salmaazzam@gmail.com","Project Manager"));
+		addEmployee(new Employee("Zeyad", "Hesham",26,"natID3","013","zeyadhesham@gmail.com","HR"));
+		addEmployee(new Employee("Ahmed", "Youssef",22,"natID4","014","ahmedyoussef@gmail.com","Software Engineer"));
+		addEmployee(new Employee("Mariam", "Hossam",19,"natID5","017","mariamhossam@gmail.com","Developer"));
+		
+		//getEmployees();
 				
 		entityManagerFactory.close();
 				
 		System.out.println("Hello World!");
 	}
 	
-	public static void addEmployee(int id, String firstname, String lastname) {
+	public static void addEmployee(Employee newEmp) {
         // The EntityManager class allows operations such as create, read, update, delete
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
         // Used to issue transactions on the EntityManager
@@ -37,13 +35,10 @@ public class App {
         	entitytransaction = entityManager.getTransaction();
         	entitytransaction.begin();
  
-            // Create and set values for new customer
-            Employee emp = new Employee();
-            emp.setId(id);
-            emp.setFirstName(firstname);
-            emp.setLastName(lastname);
- 
-            // Save the customer object
+            // Create and set values for new employee
+            Employee emp = new Employee(newEmp);
+
+            // Save the employee object
             entityManager.persist(emp);
             entitytransaction.commit();
         } catch (Exception ex) {
@@ -61,15 +56,15 @@ public class App {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
     	
 		//gets all employees
-    	String strQuery = "SELECT e FROM Employee e WHERE e.id IS NOT NULL";
+    	String strQuery = "SELECT e FROM Employee ";//WHERE e.id IS NOT NULL";
     	
-    	// Issue the query and get a matching Customer
+    	// Issue the query and get a matching Employee
     	TypedQuery<Employee> tq = entityManager.createQuery(strQuery, Employee.class);
     	List<Employee> employees;
     	try {
-    		// Get matching customer object and output
+    		// Get matching employee object and output
     		employees = tq.getResultList();
-    		employees.forEach(emp->System.out.println("First Name: "+emp.getFirstName() + "\nLast Name: " + emp.getLastName()));
+    		employees.forEach(emp->System.out.println("First Name: "+emp.getFirstName() + " - Last Name: " + emp.getLastName()));
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();

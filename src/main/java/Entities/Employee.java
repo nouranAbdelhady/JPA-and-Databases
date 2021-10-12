@@ -2,24 +2,35 @@ package Entities;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "employee")
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "empID", unique = true , updatable = false)
+	@Column(name = "emp_ID", unique = true , updatable = false)
 	private int id;
 	
-	@Column(name = "firstName", nullable = false)
+	@Column(name = "first_name", nullable = false)
     private String firstName;
  
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
     
-    @Column(name = "nationalID", unique = true )//, nullable=false)
+    @Column(name = "age", nullable = false)
+    private int age;
+    
+    @Column(name = "national_ID", unique = true , nullable=false)
     private String nationalID;
+    
+    @Column(name = "phone_number", unique = true , nullable=false)
+    private String phoneNumber;
+    
+    @Column(name = "email", unique = true , nullable=false)
+    private String email;
+    
+    @Column(name = "role", nullable=false)
+    private String role;
 
 	public int getId() {
 		return id;
@@ -52,11 +63,61 @@ public class Employee {
 	public void setNationalID(String nationalID) {
 		this.nationalID = nationalID;
 	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+    
+	public Employee(String firstName, String lastName, int age, String nationalID, String phoneNumber, String email, String role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.nationalID = nationalID;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.role = role;
+	}
+
+	public Employee(Employee newEmp) {
+		this.firstName = newEmp.firstName;
+		this.lastName = newEmp.lastName;
+		this.age = newEmp.age;
+		this.nationalID = newEmp.nationalID;
+		this.phoneNumber = newEmp.phoneNumber;
+		this.email = newEmp.email;
+		this.role = newEmp.role;
+	}
 	
 	public Employee(){
 		
 	}
-    
-    
-    
 }

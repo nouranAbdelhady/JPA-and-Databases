@@ -93,6 +93,7 @@ public class Query2 {
         		entityManager.getTransaction().begin();
 
             	foundProject.getEmployees().add(foundEmployee);
+            	foundEmployee.getProjects().add(foundProject);
                 System.out.println("Added Employee to Project!");
 
                 entityManager.persist(foundProject);

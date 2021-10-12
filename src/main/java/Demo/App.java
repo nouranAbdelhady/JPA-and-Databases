@@ -15,6 +15,7 @@ public class App {
 		addEmployee(new Employee("Zeyad", "Hesham",26,"natID3","013","zeyadhesham@gmail.com","HR"));
 		addEmployee(new Employee("Ahmed", "Youssef",22,"natID4","014","ahmedyoussef@gmail.com","Software Engineer"));
 		addEmployee(new Employee("Mariam", "Hossam",19,"natID5","017","mariamhossam@gmail.com","Developer"));
+		addEmployee(new Employee("Farah", "Ahmed",25,"natID7","01495","farahA@gmail.com","Software Engineer"));
 		System.out.println("Employees added");
 		
 		

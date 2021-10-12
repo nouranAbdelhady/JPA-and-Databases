@@ -18,10 +18,10 @@ public class App {
 		System.out.println("Employees added");
 		
 		
-		addProject(new Project("Project 1","5 October",1));	
-		addProject(new Project("Project 2","7 June",2));	
-		addProject(new Project("Project 3","23 January",1));	
-		addProject(new Project("Project 4","1 April",4));		
+		addProject(new Project("IT Project","5 October",1));	
+		addProject(new Project("Networking Project","7 June",2));	
+		addProject(new Project("Java Project","23 January",1));	
+		addProject(new Project("IT Project","1 April",4));		
 		System.out.println("Projects added");
 		
 		entityManagerFactory.close();
@@ -70,7 +70,7 @@ public class App {
             // Create and set values for new Project
             Project prj = new Project(newProj);
 
-            // Save the employee object
+            // Save the project object
             entityManager.persist(prj);
             entitytransaction.commit();
         } catch (Exception ex) {

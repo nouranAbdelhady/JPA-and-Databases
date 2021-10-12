@@ -1,5 +1,8 @@
 package Entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -31,6 +34,17 @@ public class Employee {
     
     @Column(name = "role", nullable=false)
     private String role;
+    
+    @ManyToMany
+    Set<Project> projects = new HashSet<>();
+    
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
 
 	public int getId() {
 		return id;

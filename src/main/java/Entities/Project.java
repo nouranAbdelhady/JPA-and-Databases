@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -21,6 +23,21 @@ public class Project {
 	@Column(name = "manager_id", nullable = false)		//should link to empID in Employee table
     private int mngrID;
 	
+	@ManyToMany
+    @JoinTable(
+            name = "works_on",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )private Set<Employee> employees = new HashSet<>();
+		
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -48,6 +65,14 @@ public class Project {
 	public int getMngrID() {
 		return mngrID;
 	}
+	
+	public void setMngrID(int mngrID) {
+		this.mngrID = mngrID;
+	}
+	
+	public Project() {
+		
+	}
 
 	public Project(String projectName, String startDate, int mngrID) {
 		super();
@@ -63,9 +88,7 @@ public class Project {
 		this.mngrID = project.mngrID;
 	}
 
-	public void setMngrID(int mngrID) {
-		this.mngrID = mngrID;
-	}
+	
 
 	
 

@@ -30,6 +30,7 @@ public class BonusQuery {
     		// Get matching employee object and output
     		employees = tq.setParameter("targetedRole", role).getResultList();
     		employees.forEach(emp->System.out.println("Employee id: "+emp.getId() +"\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()));
+    		//System.out.println("found");
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();

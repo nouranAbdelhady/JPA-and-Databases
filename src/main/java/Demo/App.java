@@ -2,10 +2,16 @@ package Demo;
 
 
 import javax.persistence.*;
+
+
 import Entities.Employee;
 import Entities.Project;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-public class App {
+
+@ApplicationPath("/api")
+public class App extends Application{
 	private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test_pu");
 
 	public static void main(String[] args) {
@@ -17,7 +23,6 @@ public class App {
 		addEmployee(new Employee("Mariam", "Hossam",19,"natID5","017","mariamhossam@gmail.com","Developer"));
 		addEmployee(new Employee("Farah", "Ahmed",25,"natID7","01495","farahA@gmail.com","Software Engineer"));
 		System.out.println("Employees added");
-		
 		
 		addProject(new Project("IT Project","5 October",1));	
 		addProject(new Project("Networking Project","7 June",2));	

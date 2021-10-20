@@ -25,11 +25,11 @@ public class Query2 {
 		 * {System.out.println("Project NOT found");}
 		 */
 	    
-	    addEmployeeToProject(1,93);
-	    addEmployeeToProject(1,91);
-	    addEmployeeToProject(4,93);
-	    addEmployeeToProject(5,93);
-	    addEmployeeToProject(2,91);
+	    addEmployeeToProject(1,9);
+	    addEmployeeToProject(1,7);
+	    addEmployeeToProject(4,9);
+	    addEmployeeToProject(5,9);
+	    addEmployeeToProject(2,7);
 		entityManagerFactory.close();	
 	}
 	

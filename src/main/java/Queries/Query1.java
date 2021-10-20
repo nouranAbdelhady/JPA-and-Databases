@@ -25,7 +25,7 @@ public class Query1 {
     	try {
     		// Get matching employee object and output
     		employees = tq.getResultList();
-    		employees.forEach(emp->System.out.println("Employee id: "+emp.getId() +"\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()));
+    		employees.forEach(emp->System.out.println("Employee id: "+emp.getId() +"\t\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()));
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();

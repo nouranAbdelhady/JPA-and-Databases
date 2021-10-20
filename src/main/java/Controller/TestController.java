@@ -8,8 +8,8 @@ import javax.ws.rs.core.Response;
 
 @Path("/test")
 public class TestController {
+	//access using "http://localhost:8080/api/test"
 	@GET
-    @Path("/test")
     @Produces(MediaType.TEXT_PLAIN)
     public Response test() {
         return Response.ok("Test Function").build();

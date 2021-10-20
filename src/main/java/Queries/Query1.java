@@ -9,11 +9,17 @@ public class Query1 {
 
 	public static void main(String[] args) {
 		
-		getEmployees();		
+		//List<Employee> allEmployees = getEmployees();
+		//System.out.println("Result: ");
+		//allEmployees.forEach(emp->System.out.println("Employee id: "+emp.getId() +"\t\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()));
+		
+    	String outputMessage = getEmployees();
+    	System.out.println(outputMessage);
+    	
 		entityManagerFactory.close();	
 	}
 	
-	public static void getEmployees() {
+	public static String getEmployees() {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
     	
 		//gets all employees
@@ -21,11 +27,18 @@ public class Query1 {
     	
     	// Issue the query and get a matching Employee
     	TypedQuery<Employee> tq = entityManager.createQuery(strQuery, Employee.class);
-    	List<Employee> employees;
+    	List<Employee> employees = null;
+    	
+    	String outputMessage = null;
+    	outputMessage ="Get all employees \nResult: \n";
+    	
     	try {
     		// Get matching employee object and output
     		employees = tq.getResultList();
-    		employees.forEach(emp->System.out.println("Employee id: "+emp.getId() +"\t\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()));
+    		//employees.forEach(emp->System.out.println("Employee id: "+emp.getId() +"\t\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()));
+    		for (Employee emp : employees) {
+    			outputMessage+="Employee id: "+emp.getId() + "\t\tFirst Name: "+emp.getFirstName() + " \tLast Name: " + emp.getLastName()+"\n";
+    		}
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();
@@ -33,6 +46,7 @@ public class Query1 {
     	finally {
     		entityManager.close();
     	}
+		return outputMessage;
     }
 
 }

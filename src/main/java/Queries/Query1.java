@@ -16,6 +16,7 @@ public class Query1 {
     	String outputMessage = getEmployees();
     	System.out.println(outputMessage);
     	
+    	
 		entityManagerFactory.close();	
 	}
 	
@@ -48,5 +49,5 @@ public class Query1 {
     	}
 		return outputMessage;
     }
-
+	
 }

@@ -28,8 +28,12 @@ public class Query2 {
 	    addEmployeeToProject(1,9);
 	    addEmployeeToProject(1,7);
 	    addEmployeeToProject(4,9);
-	    addEmployeeToProject(5,9);
-	    addEmployeeToProject(2,7);
+	    //addEmployeeToProject(5,9);
+	    //addEmployeeToProject(2,7);
+	    
+	    
+	    addEmployeeToProject(40,9);		//employee NOT found
+	    addEmployeeToProject(4,90);		//project NOT found
 		entityManagerFactory.close();	
 	}
 	
@@ -48,7 +52,7 @@ public class Query2 {
     		return targetedEmployee;
     	}
     	catch(NoResultException ex) {
-    		ex.printStackTrace();
+    		//ex.printStackTrace();
     	}
     	finally {
     		entityManager.close();
@@ -71,7 +75,7 @@ public class Query2 {
     		return targetedProject;
     	}
     	catch(NoResultException ex) {
-    		ex.printStackTrace();
+    		//ex.printStackTrace();
     	}
     	finally {
     		entityManager.close();
@@ -79,32 +83,42 @@ public class Query2 {
 		return null;
     }
 	
-	public static void addEmployeeToProject(int empID, int prjID) {
+	public static String addEmployeeToProject(int empID, int prjID) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         String findEmployeeQuery = "SELECT e FROM Employee e WHERE e.id =: targetedID";
-        Employee foundEmployee = (Employee) entityManager.createQuery(findEmployeeQuery).setParameter("targetedID", empID).getSingleResult();
+        Employee foundEmployee = findEmployee(empID);
+        //Employee foundEmployee = (Employee) entityManager.createQuery(findEmployeeQuery).setParameter("targetedID", empID).getSingleResult();
         
         String findProjectQuery = "SELECT p FROM Project p WHERE p.id =: targetedID";
-        Project foundProject = (Project) entityManager.createQuery(findProjectQuery).setParameter("targetedID", prjID).getSingleResult();
+        Project foundProject = findProject(prjID);
+        //Project foundProject = (Project) entityManager.createQuery(findProjectQuery).setParameter("targetedID", prjID).getSingleResult();
         
         if(foundEmployee != null){
         	if (foundProject != null) {
         		entityManager.getTransaction().begin();
+        		
+        		//to avoid error
+        		foundEmployee = (Employee) entityManager.createQuery(findEmployeeQuery).setParameter("targetedID", empID).getSingleResult();
+        		foundProject = (Project) entityManager.createQuery(findProjectQuery).setParameter("targetedID", prjID).getSingleResult();
+                
 
             	foundProject.getEmployees().add(foundEmployee);
             	foundEmployee.getProjects().add(foundProject);
-                System.out.println("Added Employee to Project!");
-
+                
                 entityManager.persist(foundProject);
                 entityManager.getTransaction().commit();
+                System.out.println("Employee with ID: " + empID + " has been added To Project with ID: " + prjID);
+                return "Employee with ID: " + empID + " has been added To Project with ID: " + prjID;
         	} 
         	else {
                 System.out.println("Project NOT found!");
+                return "Project NOT found!";
             }
         } 
         else {
             System.out.println("Employee NOT found!");
+            return "Employee NOT found!";
         }
     }
 	

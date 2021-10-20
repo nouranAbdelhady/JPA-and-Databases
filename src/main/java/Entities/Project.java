@@ -23,7 +23,7 @@ public class Project {
 	@Column(name = "manager_id", nullable = false)		//should link to empID in Employee table
     private int mngrID;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "works_on",
             joinColumns = @JoinColumn(name = "project_id"),

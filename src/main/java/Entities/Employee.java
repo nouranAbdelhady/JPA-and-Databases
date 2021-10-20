@@ -35,7 +35,7 @@ public class Employee {
     @Column(name = "role", nullable=false)
     private String role;
     
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Project> projects = new HashSet<>();
     
     public Set<Project> getProjects() {
